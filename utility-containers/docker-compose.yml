@@ -46,7 +46,7 @@ services:
     command:
       - >-
         terraform init
-        -backend-config=bucket=todo-terraform-state-566946613693-us-east-1
+        -backend-config=bucket=todo-terraform-state
         -backend-config=key=infra/dev/terraform.tfstate
         -backend-config=region=us-east-1
         -backend-config=dynamodb_table=todo-terraform-locks
