@@ -1,11 +1,11 @@
-# Infra Backend
+# Infra Bootstrap
 
 Creates the shared Terraform backend used by `infra/` and GitHub Actions, and writes the backend configuration to SSM Parameter Store.
 
 ## Usage
 
 ```bash
-cd infra-backend
+cd infra/bootstrap
 
 export TF_VAR_project_name="todo"
 export TF_VAR_aws_region="us-east-1"

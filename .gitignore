@@ -28,10 +28,10 @@ infra/.terraform/
 infra/*.tfstate
 infra/*.tfstate.*
 infra/*.tfvars
-infra-backend/.terraform/
-infra-backend/*.tfstate
-infra-backend/*.tfstate.*
-infra-backend/*.tfvars
+infra/bootstrap/.terraform/
+infra/bootstrap/*.tfstate
+infra/bootstrap/*.tfstate.*
+infra/bootstrap/*.tfvars
 
 # Utility containers
 utility-containers/.env

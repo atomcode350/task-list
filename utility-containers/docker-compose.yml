@@ -10,7 +10,7 @@ services:
       - ..:/workspace
       - kube-config:/root/.kube
 
-  terraform-backend-apply:
+  terraform-bootstrap-apply:
     build:
       context: .
       dockerfile: Dockerfile.terraform
@@ -21,7 +21,7 @@ services:
       TF_VAR_environment: dev
       TF_VAR_ssm_param_prefix: infra
     volumes:
-      - ../infra-backend:/workspace
+      - ../infra/bootstrap:/workspace
     command: "terraform init && terraform apply -auto-approve"
 
   terraform-destroy:

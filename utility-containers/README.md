@@ -94,7 +94,7 @@ docker compose run --rm aws-kubectl -c "kubectl delete deployment todo-backend-d
 
 One-time local provisioning of AWS infrastructure via Docker. This is required before the GitHub Actions workflows can run, because they authenticate using an IAM role that Terraform itself creates.
 
-This bootstrap expects the shared Terraform backend to exist already. Create it once via `../infra-backend`, then migrate any existing local `infra/terraform.tfstate` into that backend.
+This bootstrap expects the shared Terraform backend to exist already. Create it once via `../infra/bootstrap`, then migrate any existing local `infra/terraform.tfstate` into that backend.
 
 ### Prerequisites
 
@@ -130,7 +130,7 @@ This file is gitignored because it contains sensitive values.
 Create the remote state bucket, lock table, and SSM parameters once:
 
 ```bash
-cd ../infra-backend
+cd ../infra/bootstrap
 
 export TF_VAR_project_name="todo"
 export TF_VAR_aws_region="us-east-1"

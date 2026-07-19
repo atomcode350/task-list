@@ -15,7 +15,7 @@ PostgreSQL
 - `backend/`: Spring Boot API
 - `frontend/`: Expo application
 - `infra/`: Terraform infrastructure for AWS
-- `infra-backend/`: One-time Terraform bootstrap for shared remote state
+- `infra/bootstrap/`: One-time Terraform bootstrap for shared remote state
 - `utility-containers/`: Dockerized CLI tools (AWS, kubectl, infra bootstrap)
 - `backend/k8s/`: Kubernetes manifests for backend workload
 - `.github/workflows/deploy-backend.yml`: CI/CD for backend image rollout to EKS
@@ -111,14 +111,14 @@ cd infra
 2. Create the shared Terraform backend once:
 
 ```bash
-cd ../infra-backend
+cd bootstrap
 export TF_VAR_project_name="todo"
 export TF_VAR_aws_region="us-east-1"
 export TF_VAR_environment="dev"
 export TF_VAR_ssm_param_prefix="todo-dev"
 terraform init
 terraform apply -auto-approve
-cd ../infra
+cd ..
 ```
 
 3. For local runs, provide non-sensitive values via environment variables:
