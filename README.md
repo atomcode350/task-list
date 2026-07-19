@@ -99,12 +99,10 @@ Install and configure:
 
 Optional: instead of installing AWS CLI and `kubectl` locally, use `tools/`:
 
+Create `~/Downloads/aws.env` with your AWS credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`); the tooling services load it via `env_file`. Then:
+
 ```bash
 cd tools
-
-export AWS_ACCESS_KEY_ID="..."
-export AWS_SECRET_ACCESS_KEY="..."
-export AWS_DEFAULT_REGION="us-east-1"
 
 docker compose run --rm aws-kubectl -c "aws sts get-caller-identity"
 docker compose run --rm aws-kubectl -c "aws eks update-kubeconfig --name todo-dev-eks --region us-east-1"

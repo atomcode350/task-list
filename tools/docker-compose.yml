@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.aws-kubectl
-    env_file: .env
+    env_file: ~/Downloads/aws.env
     ports:
       - "5005:5005"
     volumes:
@@ -21,7 +21,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.terraform
-    env_file: .env
+    env_file: ~/Downloads/aws.env
     environment:
       TF_VAR_project_name: todo
       TF_VAR_aws_region: us-east-1
@@ -35,7 +35,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.terraform
-    env_file: .env
+    env_file: ~/Downloads/aws.env
     entrypoint: ["sh", "-c"]
     environment:
       TF_VAR_project_name: todo

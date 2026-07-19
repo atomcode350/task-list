@@ -10,12 +10,12 @@ From this directory:
 cd tools
 ```
 
-Set credentials for the current shell:
+Provide AWS credentials via `~/Downloads/aws.env` (referenced by `docker-compose.yml`; kept outside the repository so it is never committed or exposed to repo tooling):
 
 ```bash
-export AWS_ACCESS_KEY_ID="..."
-export AWS_SECRET_ACCESS_KEY="..."
-export AWS_DEFAULT_REGION="us-east-1"
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+AWS_DEFAULT_REGION=us-east-1
 ```
 
 Run AWS CLI commands:
