@@ -10,6 +10,13 @@ services:
       - ..:/workspace
       - kube-config:/root/.kube
 
+  maven:
+    image: maven:3.9.8-eclipse-temurin-17
+    working_dir: /workspace/backend
+    volumes:
+      - ..:/workspace
+      - maven-repo:/root/.m2
+
   terraform-bootstrap-apply:
     build:
       context: .
@@ -53,13 +60,6 @@ services:
         -backend-config=encrypt=true
         && terraform apply -auto-approve
         && terraform destroy -auto-approve
-
-  maven:
-    image: maven:3.9.8-eclipse-temurin-17
-    working_dir: /workspace/backend
-    volumes:
-      - ..:/workspace
-      - maven-repo:/root/.m2
 
 volumes:
   kube-config:

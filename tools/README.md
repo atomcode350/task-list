@@ -1,4 +1,4 @@
-# Utility Containers
+# Tools
 
 Run AWS CLI, `kubectl`, Terraform, and Maven through Docker instead of installing them on your machine.
 
@@ -7,7 +7,7 @@ Run AWS CLI, `kubectl`, Terraform, and Maven through Docker instead of installin
 From this directory:
 
 ```bash
-cd utility-containers
+cd tools
 ```
 
 Set credentials for the current shell:

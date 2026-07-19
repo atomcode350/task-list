@@ -4,7 +4,6 @@ Full-stack to-do list app with a Spring Boot HATEOAS API, an Expo-based frontend
 
 ## Stack
 - Backend: Java 17, Spring Boot 3, Maven, Lombok, Redis, Logback SLF4J, Micrometer Tracing Bridge OTel
-PostgreSQL
 - Database: PostgreSQL
 - Frontend: React Native Expo, TypeScript
 - Local deployment: Docker Compose
@@ -16,11 +15,22 @@ PostgreSQL
 - `frontend/`: Expo application
 - `infra/`: Terraform infrastructure for AWS
 - `infra/bootstrap/`: One-time Terraform bootstrap for shared remote state
-- `utility-containers/`: Dockerized CLI tools (AWS, kubectl, infra bootstrap)
+- `tools/`: Dockerized CLI tools (AWS, kubectl, infra bootstrap)
 - `backend/k8s/`: Kubernetes manifests for backend workload
 - `.github/workflows/deploy-backend.yml`: CI/CD for backend image rollout to EKS
 - `.github/workflows/deploy-frontend.yml`: CI/CD for frontend build + deploy to Amplify
 - `.github/workflows/deploy-infra.yml`: CI/CD for Terraform plan/apply
+
+## Deployment overview
+
+The app runs in two environments, each with its own entry point:
+
+| Environment | Entry point | Trigger | Details |
+|-------------|-------------|---------|---------|
+| Localhost | `docker-compose.yml` | `docker compose up --build` | [Local development](#local-development) |
+| AWS | `.github/workflows/deploy-*.yml` | Push to `main` | [GitHub Actions CI/CD](#github-actions-cicd) |
+
+Locally, Docker Compose builds the same backend and frontend images used in production, plus PostgreSQL and Redis containers; the `local` Spring profile bypasses Cognito so no AWS resources are needed. In AWS, the same containers run on EKS Fargate (backend + Redis) and Amplify Hosting (frontend web build) against RDS PostgreSQL, provisioned by Terraform ([Terraform workflow](#terraform-workflow-aws-infrastructure)) and deployed by the three GitHub Actions workflows.
 
 ## Local development
 
@@ -87,10 +97,10 @@ Install and configure:
 - Docker
 - Access to a GitHub repository connected to this project
 
-Optional: instead of installing AWS CLI and `kubectl` locally, use `utility-containers/`:
+Optional: instead of installing AWS CLI and `kubectl` locally, use `tools/`:
 
 ```bash
-cd utility-containers
+cd tools
 
 export AWS_ACCESS_KEY_ID="..."
 export AWS_SECRET_ACCESS_KEY="..."
