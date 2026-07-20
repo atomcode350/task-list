@@ -140,3 +140,5 @@ This is a project supporting real financial sector features
 * infra
   * refresh infra/.terraform.lock.hcl after provider or module version constraints change
 
+## Model identification
+At the end of each of your responses, add a short line in brackets explicitly indicating the exact name and version of the model you are using to process that prompt (for example: [Model: Claude 3.5 Sonnet]).
