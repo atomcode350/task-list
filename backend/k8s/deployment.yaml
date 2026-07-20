@@ -13,8 +13,6 @@ spec:
     metadata:
       labels:
         app: #{PROJECT_NAME}#-backend
-      annotations:
-        configmap-hash: "#{CONFIGMAP_HASH}#"
     spec:
       enableServiceLinks: false
       serviceAccountName: backend-secrets-sa

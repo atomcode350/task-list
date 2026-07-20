@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Applied to all resources and to configMapGenerator output so name
+# references (envFrom → backend-config-<hash>) resolve in the same namespace.
+namespace: #{K8S_NAMESPACE}#
+
+resources:
+  - namespace.yaml
+  - service-account.yaml
+  - deployment.yaml
+  - service.yaml
+  - redis-deployment.yaml
+  - redis-service.yaml
+  - hpa.yaml
+  - ingress.yaml
+
+# Generates backend-config-<hash>. Content changes produce a new name;
+# Kustomize rewrites Deployment envFrom references automatically, so
+# rollouts and kubectl rollout undo stay atomic with the matching ConfigMap.
+configMapGenerator:
+  - name: backend-config
+    envs:
+      - backend-config.env

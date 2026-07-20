@@ -65,12 +65,15 @@ export PROJECT_NAME="todo"
 aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME" --region "$AWS_REGION"
 IMAGE_URI=$(kubectl get deployment "$PROJECT_NAME-backend" -n "$K8S_NAMESPACE" \
   -o jsonpath="{.spec.template.spec.containers[0].image}")
+BACKEND_CONFIGMAP_NAME=$(kubectl get deployment "$PROJECT_NAME-backend" -n "$K8S_NAMESPACE" \
+  -o jsonpath="{.spec.template.spec.containers[0].envFrom[0].configMapRef.name}")
 
 DEBUG_MANIFEST=/tmp/deployment-debug.yaml
 cp /workspace/backend/k8s/deployment-debug.yaml "$DEBUG_MANIFEST"
 sed -i "s|#{IMAGE_URI}#|$IMAGE_URI|g" "$DEBUG_MANIFEST"
 sed -i "s|#{K8S_NAMESPACE}#|$K8S_NAMESPACE|g" "$DEBUG_MANIFEST"
 sed -i "s|#{PROJECT_NAME}#|$PROJECT_NAME|g" "$DEBUG_MANIFEST"
+sed -i "s|#{BACKEND_CONFIGMAP_NAME}#|$BACKEND_CONFIGMAP_NAME|g" "$DEBUG_MANIFEST"
 
 kubectl apply -f "$DEBUG_MANIFEST"
 kubectl rollout status deployment/"$PROJECT_NAME-backend-debug" -n "$K8S_NAMESPACE"

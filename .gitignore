@@ -7,6 +7,7 @@ backend/target/
 backend/.classpath
 backend/.project
 backend/.settings/
+backend/k8s/backend-config.env
 
 # Frontend
 frontend/node_modules/

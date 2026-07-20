@@ -30,7 +30,7 @@ spec:
               value: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
           envFrom:
             - configMapRef:
-                name: backend-config
+                name: #{BACKEND_CONFIGMAP_NAME}#
           resources:
             requests:
               cpu: "250m"
